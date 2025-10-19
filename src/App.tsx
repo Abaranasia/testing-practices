@@ -3,16 +3,31 @@ import { useEffect, useState } from 'react';
 import UserForm from './components/UserForm.tsx';
 import UserList from './components/UserList.tsx';
 
-interface User {
+export interface User {
   name: string;
-  emai: string;
+  email: string;
 };
 
-function App() {
+const App = () => {
+  const [users, setUsers] = useState<User[]>([])
+
+  useEffect(() => {
+    console.log('users :>> ', users);
+  }, [users])
+  
+  const onUserAdd = (newUser: User) => {
+    setUsers([
+      ...users,
+      newUser,
+    ])
+  };
 
   return (
     <div className="App">
-      Hello there!
+      <h1>Simple User list</h1>
+      <UserForm onUserAdd= {onUserAdd} />
+      <hr />
+      <UserList users={users} />
     </div>
   );
 }
