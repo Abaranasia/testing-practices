@@ -1,0 +1,29 @@
+{
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "jsdom": "^21.1.2",
+    "typescript": "~5.7.3",
+    "vite": "^6.4.0",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}
