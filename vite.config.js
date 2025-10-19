@@ -3,10 +3,12 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react({
-    jsxRuntime: 'automatic' // Esto habilita el JSX transform automático
+    jsxRuntime: 'automatic' // This enables JSX transform 
   })],
   test: {
-    environment: 'jsdom', // <- Esto es lo importante
-    globals: true, // Opcional, útil para evitar tener que importar describe/it/expect
+    include: ['**/*.test.tsx'],
+    environment: 'jsdom', // Required to be able to use render and screen in vitest
+    globals: true, // To avoid importing describe/it/expect
+     setupFiles: ['./setupTests.ts'], 
   },
 });
