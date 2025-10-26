@@ -1,5 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
-import UserList from "../components/UserList.tsx";
+import UserList from "../../components/UserList.tsx";
 
 describe("UserList tests", () => {
   it("render one row per user", () => {

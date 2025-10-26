@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event";
 
-import UserForm from "../components/UserForm";
+import UserForm from "../../components/UserForm";
 
 describe('UserForm tests', () => {
      it('shows two inputs and a button', () => {
