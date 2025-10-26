@@ -1,16 +1,16 @@
-import { FormEvent, useState } from 'react'
-import { User } from '../App';
+import { FormEvent, useState } from "react";
+import { User } from "../App";
 
-  interface UserFormProps {
-    onUserAdd: (user: User) => void
-  }
+interface UserFormProps {
+  onUserAdd: (user: User) => void;
+}
 
-  const defaultUser= {
-    name: '',
-    email:'',
-  };
+const defaultUser = {
+  name: "",
+  email: "",
+};
 
-const UserForm = ({ onUserAdd }:  UserFormProps) => {
+const UserForm = ({ onUserAdd }: UserFormProps) => {
   const [name, setName] = useState<string>(defaultUser.name);
   const [email, setEmail] = useState<string>(defaultUser.email);
 
@@ -18,10 +18,14 @@ const UserForm = ({ onUserAdd }:  UserFormProps) => {
     event.preventDefault();
     onUserAdd({ name, email });
     
+    resetForm();
+  };
+
+  const resetForm = () => {
     setName(defaultUser.name);
     setEmail(defaultUser.email);
-  }
-
+  };
+  
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -42,7 +46,7 @@ const UserForm = ({ onUserAdd }:  UserFormProps) => {
       </div>
       <button>Add User</button>
     </form>
-  )
-}
+  );
+};
 
 export default UserForm;
