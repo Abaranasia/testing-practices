@@ -5,13 +5,21 @@ import { User } from '../App';
     onUserAdd: (user: User) => void
   }
 
+  const defaultUser= {
+    name: '',
+    email:'',
+  };
+
 const UserForm = ({ onUserAdd }:  UserFormProps) => {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
+  const [name, setName] = useState<string>(defaultUser.name);
+  const [email, setEmail] = useState<string>(defaultUser.email);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onUserAdd({ name, email });
+    
+    setName(defaultUser.name);
+    setEmail(defaultUser.email);
   }
 
   return (
