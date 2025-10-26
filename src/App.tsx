@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import UserForm from './components/UserForm.tsx';
 import UserList from './components/UserList.tsx';
@@ -10,11 +10,7 @@ export interface User {
 
 const App = () => {
   const [users, setUsers] = useState<User[]>([])
-
-  useEffect(() => {
-    console.log('users :>> ', users);
-  }, [users])
-  
+ 
   const onUserAdd = (newUser: User) => {
     setUsers([
       ...users,
