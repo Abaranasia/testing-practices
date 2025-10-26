@@ -1,42 +1,42 @@
-import '@testing-library/jest-dom';
-import { render, screen } from "@testing-library/react"
-import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
 
 import UserForm from "../../components/UserForm";
+import { submitData } from "./App.fixtures";
 
-describe('UserForm tests', () => {
-     it('shows two inputs and a button', () => {
-        render(<UserForm onUserAdd={vi.fn()} />)
+const userMock = {
+  name: "pepito",
+  email: "pepo@gmail.com",
+};
 
-        const inputs = screen.getAllByRole('textbox');
-        const button = screen.getByRole('button');
+describe("UserForm tests", () => {
+  it("shows two inputs and a button", () => {
+    render(<UserForm onUserAdd={vi.fn()} />);
 
-        expect(inputs).toHaveLength(2);
-        expect(button).toBeInTheDocument();
-    });
+    const inputs = screen.getAllByRole("textbox");
+    const button = screen.getByRole("button");
 
-    it('should call onUserAdd with user name and email when the form is submitted', async () => {
-        const userMock = {
-            name: 'pepito',
-            email: 'pepo@gmail.com'
-        };
-        const onUserAddMock = vi.fn();
- 
-        render(<UserForm onUserAdd={onUserAddMock} />)
+    expect(inputs).toHaveLength(2);
+    expect(button).toBeInTheDocument();
+  });
 
-        // const [nameInput, emailInput] = screen.getAllByRole('textbox');
-        const nameInput = screen.getByRole('textbox', {name: /name/i});
-        const emailInput = screen.getByRole('textbox', {name: /email/i});
+  it("should call onUserAdd with user name and email when the form is submitted", async () => {
+    const onUserAddMock = vi.fn();
 
-        await userEvent.click(nameInput);
-        await userEvent.keyboard(userMock.name);
+    render(<UserForm onUserAdd={onUserAddMock} />);
 
-        await userEvent.click(emailInput);
-        await userEvent.keyboard(userMock.email);
+    await submitData(userMock);
 
-        const button = screen.getByRole('button');
-        await userEvent.click(button);
+    expect(onUserAddMock).toHaveBeenCalledWith(userMock);
+  });
 
-        expect(onUserAddMock).toHaveBeenCalledWith(userMock);
-    }) 
+   it("empties the two inputs when form is submitted", async () => {
+    render(<UserForm onUserAdd={() => vi.fn()} />);
+
+    const { nameInput, emailInput } = await submitData(userMock);
+
+    expect(nameInput).toHaveValue('');
+    expect(emailInput).toHaveValue('');
+  }); 
 });
+
+
